@@ -1,5 +1,5 @@
 import global from './global.js';
-import { Object3D } from '/scripts/three/build/three.module.js';
+import { Object3D } from '../three/build/three.module.js';
 
 export default class InputHandler {
     constructor(renderer, scene) {
