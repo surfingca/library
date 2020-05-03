@@ -1,2 +1,2 @@
-# user_inputs_part_3
+# User Inputs Part 3
 Finished code for Tutorial
