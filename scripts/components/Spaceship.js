@@ -35,8 +35,8 @@ export default class Spaceship {
                 let controller = global.inputHandler.getXRController("RIGHT", "targetRay");
                 this._pivotPoint.rotation.copy(controller.rotation);
             }
-            let inputSource = global.inputHandler.getXRInputSource("RIGHT");
-            if((inputSource != null && inputSource.gamepad.buttons[0].pressed)
+            let gamepad = global.inputHandler.getXRGamepad("RIGHT");
+            if((gamepad != null && gamepad.buttons[0].pressed)
                 || global.inputHandler.isScreenTouched()
                 || global.inputHandler.isKeyPressed("KeyW"))
             {

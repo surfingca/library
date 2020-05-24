@@ -2,9 +2,9 @@ import global from './global.js';
 import { Object3D } from '../three/build/three.module.js';
 
 export default class InputHandler {
-    constructor(renderer, scene) {
+    constructor(renderer, controllerParent) {
         this._renderer = renderer;
-        this._scene = scene;
+        this._controllerParent = controllerParent;
         this._session;
         this._leftXRInputSource;
         this._rightXRInputSource;
@@ -61,12 +61,12 @@ export default class InputHandler {
         for(let i = 0; i < inputSources.length; i++) {
             if(inputSources[i].handedness == "right") {
                 this._rightXRInputSource = inputSources[i];
-                this._scene.add(this._rightXRController.targetRay);
-                this._scene.add(this._rightXRController.grip);
+                this._controllerParent.add(this._rightXRController.targetRay);
+                this._controllerParent.add(this._rightXRController.grip);
             } else if(inputSources[i].handedness == "left") {
                 this._leftXRInputSource = inputSources[i];
-                this._scene.add(this._leftXRController.targetRay);
-                this._scene.add(this._leftXRController.grip);
+                this._controllerParent.add(this._leftXRController.targetRay);
+                this._controllerParent.add(this._leftXRController.grip);
             }
         }
     }
@@ -76,42 +76,46 @@ export default class InputHandler {
         this._session = null;
         this._rightXRInputSource = null;
         this._leftXRInputSource = null;
-        this._scene.remove(this._rightXRController.targetRay);
-        this._scene.remove(this._rightXRController.grip);
-        this._scene.remove(this._leftXRController.targetRay);
-        this._scene.remove(this._leftXRController.grip);
+        this._controllerParent.remove(this._rightXRController.targetRay);
+        this._controllerParent.remove(this._rightXRController.grip);
+        this._controllerParent.remove(this._leftXRController.targetRay);
+        this._controllerParent.remove(this._leftXRController.grip);
     }
 
     _onXRInputSourceChange(event) {
         for(let i = 0; i < event.removed.length; i++) {
             if(event.removed[i] == this._rightXRInputSource) {
                 this._rightXRInputSource = null;
-                this._scene.remove(this._rightXRController.targetRay);
-                this._scene.remove(this._rightXRController.grip);
+                this._controllerParent.remove(this._rightXRController.targetRay);
+                this._controllerParent.remove(this._rightXRController.grip);
             } else if(event.removed[i] == this._leftXRInputSource) {
                 this._leftXRInputSource = null;
-                this._scene.remove(this._leftXRController.targetRay);
-                this._scene.remove(this._leftXRController.grip);
+                this._controllerParent.remove(this._leftXRController.targetRay);
+                this._controllerParent.remove(this._leftXRController.grip);
             }
         }
         for(let i = 0; i < event.added.length; i++) {
             if(event.added[i].handedness == "right") {
                 this._rightXRInputSource = event.added[i];
-                this._scene.add(this._rightXRController.targetRay);
-                this._scene.add(this._rightXRController.grip);
+                this._controllerParent.add(this._rightXRController.targetRay);
+                this._controllerParent.add(this._rightXRController.grip);
             } else if(event.added[i].handedness == "left") {
                 this._leftXRInputSource = event.added[i];
-                this._scene.add(this._leftXRController.targetRay);
-                this._scene.add(this._leftXRController.grip);
+                this._controllerParent.add(this._leftXRController.targetRay);
+                this._controllerParent.add(this._leftXRController.grip);
             }
         }
     }
 
-    getXRInputSource(hand) {
+    getXRGamepad(hand) {
         if(hand == "LEFT") {
-            return this._leftXRInputSource;
+            return (this._leftXRInputSource)
+                ? this._leftXRInputSource.gamepad
+                : null;
         } else if(hand == "RIGHT") {
-            return this._rightXRInputSource;
+            return (this._rightXRInputSource)
+                ? this._rightXRInputSource.gamepad
+                : null;
         } else {
             return null;
         }
