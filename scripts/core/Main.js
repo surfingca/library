@@ -14,10 +14,6 @@ import BasicMovement from '/library/scripts/components/BasicMovement.js';
 import AddImmersion from '/library/scripts/components/AddImmersion.js';
 
 import AudioHandler from '/library/scripts/core/AudioHandler.js';
-import InputHandler from '/library/scripts/core/InputHandler.js';
-import SessionHandler from '/library/scripts/core/SessionHandler.js';
-import global from '/library/scripts/core/global.js';
-import * as THREE from '/library/scripts/three/build/three.module.js';
 
 export default class Main {
     constructor() {
