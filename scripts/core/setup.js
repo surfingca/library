@@ -1,11 +1,11 @@
 import Main from './Main.js';
-import global from './global.js';
+import global from '/global.js';
 
 global.deviceType = "MOBILE";
 global.isChrome = navigator.userAgent.indexOf('Chrome') !== -1;
 
 function start() {
-    new Main();
+    window.main = new Main();
 }
 
 function hasPointerLock() {
