@@ -1,5 +1,5 @@
 import Main from './Main.js';
-import global from '/library/scripts/core/global.js';
+import global from '/core/global.js';
 
 global.deviceType = "MOBILE";
 global.isChrome = navigator.userAgent.indexOf('Chrome') !== -1;
