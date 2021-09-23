@@ -84,7 +84,7 @@ export default class Main {
         });
         let planet = new GLTFAsset({
             "Filename": "./models/lowpoly_planet.glb",
-            "Scale": 0.01,
+            "Scale": 0.03,
             "Position": [10,2,-20],
             "Rotation": [0,0,0],
         });
